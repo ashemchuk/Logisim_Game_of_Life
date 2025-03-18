@@ -11,40 +11,56 @@ ds 32
 # 0xD0 - 0xEF
 
 asect 0xF0 ## 0xF0???
-FIELD: 
+CWF:  # current working field
 ds 1
 PRINT_ENABLE:
 ds 1
+STOP:
+ds 1
 
-
-#count_neighbours: # r0 - 0 .. 255 - position of checking cell
-#	#need to check 8 neighbours: N, NE, E, ES, S, SW, W, WN
-#	#N
-#	save r1
-#	
-#	
-#	restore r1
-#	
 asect 0x00
 ldi r0 , field0
 dec r0
 stsp r0
 
-
 main:
-	jsr set_cur_field
-	ldi r1, 32 # byte number
+	while  # button STOP is not pressed
+		ldi r0, STOP
+		ld r0, r0
+		tst r0
+	stays z
+		ldi r0, PRINT_ENABLE
+		ldi r1, 0
+		st r0, r1
+		# start of calculations, print is not enable
+		jsr calculate
+	wend
+halt
+
+
+
+calculate:
+	# jsr set_cur_field
+	# pop r2 # field0 or field1
+	ldi r1, 32 # byte count
 	while 
 		dec r1
 	stays nz
 		ldi r0, 0b10000000 # mask
-		
+		while 
+			tst r0
+		stays nz
+		## check_neighbours
+			jsr check_position 
+			shra r0
+		wend
 		shl r0
 	wend
-	halt 
+	rts
+
 	
-set_cur_field:
-	ldi r3, FIELD
+set_cur_field: # result -> r2
+	ldi r3, CWF
 	ld r3, r3
 	if
 		tst r3
@@ -53,20 +69,31 @@ set_cur_field:
 	else
 		ldi r2, field1
 	fi
-	#r2 - address of current field
 	rts	
-
-check_position: # return 0 or 1, 0 - dead, 1 - alive cell (into r0)
-#r0 - mask, r1 - byte number
-	save r2
-	save r3
-	
-	
-	
-	
-	restore r3
-	restore r2
+# we have 32-byteset, so to choose cell we need to know 2 coordinates:
+# number of byte and number of bit
+# it's easyier (for iteration and for checking) to store number of bit like a bitmask
+# where mask have one 1 in place we check
+check_position: # return 0 or 1, 0 - dead, 1 - alive cell 
+# r1 - number of byte, r0- bitmask
+	jsr set_cur_field
+	# address of field in r2
+	add r1, r2 # offset 
+	ld r2, r2
+	and r0, r2
+	if 
+		tst r2
+	is z
+		ldi r2, 0
+	else 
+		ldi r2, 1
+	fi
+	# push r2
 	rts
-	
+
+count_neighbours: # 
+# r1 - number of byte, r0- bitmask
+
+	rts
 
 end
