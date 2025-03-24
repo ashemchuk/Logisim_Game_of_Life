@@ -10,12 +10,17 @@ field1:
 ds 32
 # 0xD0 - 0xEF
 
-asect 0xF0 ## 0xF0???
+asect 0xF0 
 CWF:  # current working field
 ds 1
-PRINT_ENABLE:
+PRINT_ENABLE: #0xf1
 ds 1
-STOP:
+STOP: #0xf2
+ds 1
+COORD:	#0xf3
+# 1st 4 bits - X, others - Y
+ds 1 	
+ENTER:
 ds 1
 
 asect 0x00
@@ -23,12 +28,31 @@ ldi r0 , field0
 dec r0
 stsp r0
 
+setup: # 1st step of game: user move cursor by buttons LEFT, RIGHT, UP, DOWN.
+# Then user can start the game by pressing STOP(this button start and STOP the game)
+	while 
+		ldi r0, STOP
+		ld r0, r2
+	stays z # waiting for the 1st press
+		ldi r1, COORD
+		#pooling 
+		ld r1, r2 # 4-bit coardinates to byte in field
+		if # enter is pressed -> print current coord
+			ld r3, 
+		is
+
+		fi
+	wend
+
+
+
+
 main:
 	while  # button STOP is not pressed
 		ldi r0, STOP
 		ld r0, r0
 		tst r0
-	stays z
+	stays nz
 		ldi r0, PRINT_ENABLE
 		ldi r1, 0
 		st r0, r1
