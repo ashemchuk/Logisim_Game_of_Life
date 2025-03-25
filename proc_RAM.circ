@@ -82,9 +82,8 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
       <a name="valign" val="base"/>
     </tool>
   </lib>
-  <lib desc="file#/Users/annashemchuk/Downloads/Cdm-8-2017-mark4.circ" name="7"/>
-  <lib desc="jar#/Users/annashemchuk/Downloads/cdm-devkit-misc-0.2.2/jar/logisim-debugger-0.2.2.jar#org.cdm.logisim.debugger.Components" name="8"/>
-  <lib desc="file#/Users/annashemchuk/Downloads/CdM-8-mark5-full.circ" name="9"/>
+  <lib desc="jar#libs/cdm-devkit-misc-0.2.2/jar/logisim-debugger-0.2.2.jar#org.cdm.logisim.debugger.Components" name="7"/>
+  <lib desc="file#libs/CdM-8-mark5-full.circ" name="8"/>
   <main name="main"/>
   <options>
     <a name="gateUndefined" val="ignore"/>
@@ -1166,7 +1165,7 @@ cd 0 d0 0 8c d1 c0 a4
       <a name="label" val="read/write'"/>
       <a name="labelfont" val="SansSerif plain 9"/>
     </comp>
-    <comp lib="8" loc="(210,210)" name="Debugger"/>
+    <comp lib="7" loc="(210,210)" name="Debugger"/>
     <comp lib="1" loc="(570,1440)" name="NOT Gate"/>
     <comp lib="1" loc="(1590,1040)" name="AND Gate">
       <a name="inputs" val="2"/>
@@ -1260,7 +1259,7 @@ cd 0 d0 0 8c d1 c0 a4
       <a name="label" val="code"/>
       <a name="labelfont" val="SansSerif plain 9"/>
     </comp>
-    <comp lib="9" loc="(370,430)" name="CdM_8_mark5"/>
+    <comp lib="8" loc="(370,430)" name="CdM_8_mark5"/>
     <comp lib="4" loc="(2180,650)" name="Register">
       <a name="width" val="16"/>
     </comp>
