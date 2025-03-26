@@ -29,12 +29,13 @@ dec r0
 stsp r0
 
 main:
-    ldi r0, 0 
-    inc r0
-    ldi r1, 0xc0
+    ldi r0, 0b010101011
+    ldi r1, 0xb0
     st r1, r0
-    inc r1
-    dec r1
+    ldi r1, 0xef
+    st r1, r0
+    ldi r0, 0
+    ldi r1, 0xcf
     st r1, r0
     halt
 end
