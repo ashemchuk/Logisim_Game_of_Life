@@ -15,7 +15,7 @@ CWF:  # current working field
 ds 1
 PRINT_ENABLE: #0xf1
 ds 1
-STOP: #0xf2
+START_STOP_btn: #0xf2
 ds 1
 COORD:	#0xf3
 # 1st 4 bits - X, others - Y
@@ -29,27 +29,17 @@ dec r0
 stsp r0
 
 setup: # 1st step of game: user move cursor by buttons LEFT, RIGHT, UP, DOWN.
-# Then user can start the game by pressing STOP(this button start and STOP the game)
+# Then user can start the game by pressing START_STOP_btn(this button start and stop the game)
 	while 
-		ldi r0, STOP
+		ldi r0, START_STOP_btn
 		ld r0, r2
 	stays z # waiting for the 1st press
-		ldi r1, COORD
-		#pooling 
-		ld r1, r2 # 4-bit coardinates to byte in field
-		if # enter is pressed -> print current coord
-			ld r3, 
-		is
-
-		fi
+	# busy wating
 	wend
 
-
-
-
 main:
-	while  # button STOP is not pressed
-		ldi r0, STOP
+	while  # button START_STOP_btn is not pressed
+		ldi r0, START_STOP_btn
 		ld r0, r0
 		tst r0
 	stays nz
