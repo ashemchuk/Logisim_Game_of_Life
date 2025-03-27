@@ -15,7 +15,7 @@ CWF:  # current working field
 ds 1
 PRINT_ENABLE: #0xf1
 ds 1
-STOP: #0xf2
+START_STOP_btn: #0xf2
 ds 1
 COORD:	#0xf3
 # 1st 4 bits - X, others - Y
@@ -29,23 +29,19 @@ dec r0
 stsp r0
 
 main:
-    ldi r0, 0b00110011
-    ldi r1, 0xb0
-    ldi r2, 0xd0
+#1st press -> start the game
+    ldi r0, START_STOP_btn
     while 
-        cmp r1, r2
-    stays nz
-        st r1, r0
-        inc r1
+        ld r0, r1
+        tst r1
+    stays z
+        inc r2
     wend
-    ldi r0, 0b01010101
-    ldi r1, 0xd0
-    ldi r2, 0xf0
+#2nd press -> pause (in this stage cursor enabled again)
     while 
-        cmp r1, r2
+        ld r0, r1
+        tst r1
     stays nz
-        st r1, r0
-        inc r1
     wend
     halt
 end
