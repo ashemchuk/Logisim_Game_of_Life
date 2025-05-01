@@ -1,2 +1,5 @@
 build
 .vscode
+clang-cdm-macos-latest
+**/*.dSYM
+a.out
