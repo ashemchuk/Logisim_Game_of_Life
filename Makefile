@@ -1,5 +1,5 @@
 CC=./clang-cdm-macos-latest/clang-19
-C_OPTS=-target cdm -S
+C_OPTS=-target cdm -S -O1
 
 ASM=cocas
 ASM_OPTS=-t cdm16 --debug build/out.dbg.json
@@ -11,5 +11,5 @@ print.asm: print.c
 	$(CC) $(C_OPTS) -o print.asm print.c
 main.asm: main.c
 	$(CC) $(C_OPTS) -o main.asm main.c
-life.asm: life.c
+life.asm: life.c 
 	$(CC) $(C_OPTS) -o life.asm life.c

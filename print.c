@@ -1,6 +1,14 @@
 #include "print.h"
-void print(int buf[SIZE]) {
+void print(char buf[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; i++) {
-        DISPLAY = buf[SIZE];
+        unsigned int mask = 0b0000000000000001;
+        int ans = 0;
+        for (int j = 0; j < SIZE; j++) {
+            if (buf[i][j]) {
+                ans |= mask;
+            }
+            mask <<= 1;
+        }
+        DISPLAY[i] = ans;
     }
 }

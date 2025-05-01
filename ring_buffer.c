@@ -12,8 +12,8 @@ TRingBuffer RB;
 int getCount() {
     return RB.count;
 }
-char isInRB(Ceil c) {
-    return isIn[c.x][c.y];
+char isInRB(Ceil* c) {
+    return isIn[c->x][c->y];
 }
 void init() {
     RB.read = 0;
@@ -21,17 +21,17 @@ void init() {
     RB.count = 0;
 }
 
-void push(Ceil c) {
+void push(Ceil* c) {
     if (!isInRB(c)) {
         RB.write = (RB.write + 1) % RB_SIZE;
-        RB.buf[RB.write] = c;
+        RB.buf[RB.write] = *c;
         RB.count++;
-        isIn[c.x][c.y] = 1;
+        isIn[c->x][c->y] = 1;
     }
 }
 
-Ceil pop() {
-    Ceil c = { -1, -1};
+void pop(Ceil* c) {
+    c->x = -1;
     if (RB.count > 0) {
         c = RB.buf[RB.read];
         RB.read = (RB.read + 1) % RB_SIZE;
@@ -45,4 +45,4 @@ Ceil pop() {
 
 //     return 0;
 // }
-// #endif 
+// #endif

@@ -8,6 +8,6 @@ typedef struct {
     char y;
 } Ceil;
 
-void NextGen (char read[SIZE][SIZE], char write[SIZE][SIZE]);
-void initFstGen(char read[SIZE][SIZE]);
-#endif 
+void nextGeneration (char read[SIZE][SIZE], char write[SIZE][SIZE]);
+// void initFstGen(char read[SIZE][SIZE]);
+#endif

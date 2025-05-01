@@ -3,8 +3,8 @@
 #include "life.h"
 
 void init();
-void push(Ceil c);
-Ceil pop();
+void push(Ceil* c);
+Ceil* pop();
 int getCount();
 
 #endif

@@ -2,6 +2,6 @@
 #define PRINT_H
 
 #include "life.h"
-extern volatile int DISPLAY;
-void print(int buf[SIZE]);
+extern volatile int DISPLAY[SIZE];
+void print(char buf[SIZE][SIZE]);
 #endif
