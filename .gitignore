@@ -2,4 +2,6 @@ build
 .vscode
 clang-cdm-macos-latest
 **/*.dSYM
-a.out
+*.out
+.DS_Store
+*.img
