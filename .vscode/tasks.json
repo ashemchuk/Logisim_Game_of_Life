@@ -15,6 +15,17 @@
 			"label": "MAKEE",
 			"type":"shell",
 			"command": ["make"]
+
+		}, 
+		{
+			"label": "C build active file",
+			"command": ["gcc"],
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/a.out",
+			],
 			
 		}
 	]
