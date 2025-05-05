@@ -1,41 +1,40 @@
 #include "life.h"
-short countNeighbours_4(short word) {
-    return (((word & 0b0100010001000100) ^ 0b0100010001000100) >> 2) &
+unsigned short countNeighbours_4(unsigned short word) {
+    return ((((word & 0b0100010001000100) ^ 0b0100010001000100) >> 2) &
     ((word & 0b0010001000100010) >> 1) &
-    ((word & 0b0001000100010001) | (word & 0b1000100010001000) >> 3);
+    ((word & 0b0001000100010001) | (word & 0b1000100010001000) >> 3)) << 3;
 }
-short HEIGHT = SIZE;
-short WIDTH = SIZE;
+unsigned short HEIGHT = SIZE;
+unsigned short WIDTH = SIZE;
 #define FIELD_SIZE 108
- //(SIZE + 2) * (SIZE / 4 + 2); // 4 = sizeof(short) * 2 -- 4 bits for each ceil
-void next_gen(short field[], short write[]) {
-    for (short i = 1; i <= SIZE; i++) { // row
-        for (short j = 1; j <= SIZE / 4; j++) { // one of 4 ceil
-            short c = field[i * 6 + j];
-            short N = field[(i - 1) * 6 + j];
-            short S = field[(i + 1) * 6 + j];
-            short E = (field[i * 6 + (j - 1)] & 0b0000000000001111) | (c << 4);
-            short W = (field[i * 6 + (j + 1)] & 0b1111000000000000) | (c >> 4);
-            short NW = (field[(i - 1) * 6 + (j - 1)] & 0b0000000000001111) | (N << 4);
-            short NE = (field[(i - 1) * 6 + (j + 1)] & 0b1111000000000000) | (N >> 4);
-            short SW = (field[(i + 1) * 6 + (j - 1)] & 0b0000000000001111) | (S << 4);
-            short SE = (field[(i + 1) * 6 + (j + 1)] & 0b1111000000000000) | (S >> 4);
-            short neighbours = N + S + E + W + NW + NE + SW + SE;
-            short word = neighbours | c;
-            short new = countNeighbours_4(word);
+ //(SIZE + 2) * (SIZE / 4 + 2); // 4 = sizeof(unsigned short) * 2 -- 4 bits for each ceil
+void next_gen(unsigned short field[], unsigned short write[]) {
+    for (unsigned short i = 1; i <= SIZE; i++) { // row
+        for (unsigned short j = 1; j <= SIZE / 4; j++) { // one of 4 ceil
+            unsigned short c = field[i * 6 + j];
+            unsigned short N = field[(i - 1) * 6 + j];
+            unsigned short S = field[(i + 1) * 6 + j];
+            unsigned short W = ((field[i * 6 + (j - 1)] & 0b0000000000001111) << 12 | (c >> 4));
+            unsigned short E = ((field[i * 6 + (j + 1)] & 0b1111000000000000) >> 12 | (c << 4));
+            unsigned short NW = ((field[(i - 1) * 6 + (j - 1)] & 0b0000000000001111) << 12 | (N >> 4));
+            unsigned short NE = ((field[(i - 1) * 6 + (j + 1)] & 0b1111000000000000) >> 12 | (N << 4));
+            unsigned short SW = ((field[(i + 1) * 6 + (j - 1)] & 0b0000000000001111) << 12 | (S  >> 4));
+            unsigned short SE = ((field[(i + 1) * 6 + (j + 1)] & 0b1111000000000000) >> 12 | (S << 4));
+            unsigned short neighbours = (N >> 3) + (S >> 3) + (E >> 3) + (W>>3) + (NW>>3) + (NE>>3) + (SW>>3) + (SE>>3);
+            unsigned short word = neighbours | c;
+            unsigned short new = countNeighbours_4(word);
             write[i * 6 + j] = new;
-            // занулить края
         }
     }
 }
-// #ifdef LIFE_TEST
+#ifdef LIFE_TEST
 #include <stdio.h>
 
-short field[FIELD_SIZE] = {
+unsigned short field[FIELD_SIZE] = {
     0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
-    0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
-    0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
-    0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
+    0b0000000000000000, 0b0000000000001000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
+    0b0000000000000000, 0b0000000000000000, 0b1000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
+    0b0000000000000000, 0b0000000010001000, 0b1000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
     0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
     0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
     0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
@@ -52,20 +51,25 @@ short field[FIELD_SIZE] = {
     0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
 };
 
-void print_field(short field[]) {
-    for (short i = 1; i <= SIZE; i++) {
-        for (short j = 1; j <= SIZE / 4; j++) {
-            short word = field[i * 4 + j];
+void print_field(unsigned short field[]) {
+    for (unsigned short i = 1; i <= SIZE; i++) {
+        for (unsigned short j = 1; j <= SIZE / 4; j++) {
+            unsigned short word = field[i * 6 + j];
             printf("%d%d%d%d", (word & 0b1000000000000000) != 0, (word & 0b0000100000000000) != 0, (word & 0b0000000010000000) != 0, (word & 0b0000000000001000) != 0);
         }
         printf("\n");
     }
+    printf("\n");
 }
-short field2[FIELD_SIZE];
+unsigned short field2[FIELD_SIZE];
 int main(void) {
+    print_field(field);
+    next_gen(field, field2);
+    print_field(field2);
+    next_gen(field2, field);
     print_field(field);
     next_gen(field, field2);
     print_field(field2);
     return 0;
 }
-// #endif
+#endif
