@@ -9,21 +9,21 @@ unsigned short WIDTH = SIZE;
 #define FIELD_SIZE 108
  //(SIZE + 2) * (SIZE / 4 + 2); // 4 = sizeof(unsigned short) * 2 -- 4 bits for each ceil
 void next_gen(unsigned short field[], unsigned short write[]) {
-    for (unsigned short i = 1; i <= SIZE; i++) { // row
-        for (unsigned short j = 1; j <= SIZE / 4; j++) { // one of 4 ceil
-            unsigned short c = field[i * 6 + j];
-            unsigned short N = field[(i - 1) * 6 + j];
-            unsigned short S = field[(i + 1) * 6 + j];
-            unsigned short W = ((field[i * 6 + (j - 1)] & 0b0000000000001111) << 12 | (c >> 4));
-            unsigned short E = ((field[i * 6 + (j + 1)] & 0b1111000000000000) >> 12 | (c << 4));
-            unsigned short NW = ((field[(i - 1) * 6 + (j - 1)] & 0b0000000000001111) << 12 | (N >> 4));
-            unsigned short NE = ((field[(i - 1) * 6 + (j + 1)] & 0b1111000000000000) >> 12 | (N << 4));
-            unsigned short SW = ((field[(i + 1) * 6 + (j - 1)] & 0b0000000000001111) << 12 | (S  >> 4));
-            unsigned short SE = ((field[(i + 1) * 6 + (j + 1)] & 0b1111000000000000) >> 12 | (S << 4));
-            unsigned short neighbours = (N >> 3) + (S >> 3) + (E >> 3) + (W>>3) + (NW>>3) + (NE>>3) + (SW>>3) + (SE>>3);
+    for (unsigned short i = 6; i <= 96; i+=6) { // row
+        for (unsigned short j = 1; j <= 4; j++) { // one of 4 ceil
+            unsigned short c = field[i + j];
+            unsigned short N = field[(i - 6) + j];
+            unsigned short S = field[(i + 6) + j];
+            unsigned short W = ((field[i + (j - 1)] & 0b0000000000001111) << 12 | (c >> 4));
+            unsigned short E = ((field[i + (j + 1)] & 0b1111000000000000) >> 12 | (c << 4));
+            unsigned short NW = ((field[(i - 6) + (j - 1)] & 0b0000000000001111) << 12 | (N >> 4));
+            unsigned short NE = ((field[(i - 6) + (j + 1)] & 0b1111000000000000) >> 12 | (N << 4));
+            unsigned short SW = ((field[(i + 6) + (j - 1)] & 0b0000000000001111) << 12 | (S >> 4));
+            unsigned short SE = ((field[(i + 6) + (j + 1)] & 0b1111000000000000) >> 12 | (S << 4));
+            unsigned short neighbours = (N >> 3) + (S >> 3) + (E >> 3) + (W >> 3) + (NW >> 3) + (NE >> 3) + (SW >> 3) + (SE >> 3);
             unsigned short word = neighbours | c;
             unsigned short new = countNeighbours_4(word);
-            write[i * 6 + j] = new;
+            write[i + j] = new;
         }
     }
 }
