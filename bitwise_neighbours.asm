@@ -50,6 +50,7 @@ countNeighbours_4>                      # -- Begin function countNeighbours_4
 	and r0, r1, r0
 	ldi	r1, 4369
 	and r0, r1, r0
+	shl	r0, r0, 3
 	rts
                                         # -- End function
 end.
