@@ -30,7 +30,7 @@
                 "image": "${workspaceFolder}${/}build${/}out.img",
                 "debug": "${workspaceFolder}${/}build${/}out.dbg.json"
             },
-            "preLaunchTask": "MAKEE"
+            "preLaunchTask": "bitwise make"
         },
     ]
 }

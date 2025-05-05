@@ -18,6 +18,11 @@
 
 		}, 
 		{
+			"label": "bitwise make",
+			"type": "shell",
+			"command": ["make", "bitwise"]
+		},
+		{
 			"label": "C build active file",
 			"command": ["gcc"],
 			"args": [

@@ -1,30 +1,6 @@
-#include "life.h"
-#include "bitwise_nieghbours.h"
-
-
-void next_gen(unsigned short field[], unsigned short write[]) {
-    for (unsigned short i = 6; i <= 96; i+=6) { // row
-        for (unsigned short j = 1; j <= 4; j++) { // one of 4 ceil
-            unsigned short c = field[i + j];
-            unsigned short N = field[(i - 6) + j];
-            unsigned short S = field[(i + 6) + j];
-            unsigned short W = ((field[i + (j - 1)] & 0b0000000000001111) << 12 | (c >> 4));
-            unsigned short E = ((field[i + (j + 1)] & 0b1111000000000000) >> 12 | (c << 4));
-            unsigned short NW = ((field[(i - 6) + (j - 1)] & 0b0000000000001111) << 12 | (N >> 4));
-            unsigned short NE = ((field[(i - 6) + (j + 1)] & 0b1111000000000000) >> 12 | (N << 4));
-            unsigned short SW = ((field[(i + 6) + (j - 1)] & 0b0000000000001111) << 12 | (S >> 4));
-            unsigned short SE = ((field[(i + 6) + (j + 1)] & 0b1111000000000000) >> 12 | (S << 4));
-            unsigned short neighbours = (N >> 3) + (S >> 3) + (E >> 3) + (W >> 3) + (NW >> 3) + (NE >> 3) + (SW >> 3) + (SE >> 3);
-            unsigned short word = neighbours | c;
-            unsigned short new = countNeighbours_4(word);
-            write[i + j] = new;
-        }
-    }
-}
-#ifdef LIFE_TEST
-#include <stdio.h>
-//https://conwaylife.appspot.com/pattern/achimsp8
-unsigned short field[FIELD_SIZE] = {
+#include "bitwise_life.h"
+#include "bitwise_print.h"
+unsigned short FIELD0[FIELD_SIZE] = {
     0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
     0b0000000000000000, 0b0000000000000000, 0b1000100000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
     0b0000000000000000, 0b0000000000001000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
@@ -45,27 +21,13 @@ unsigned short field[FIELD_SIZE] = {
     0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
 };
 
-void print_field(unsigned short field[]) {
-    for (unsigned short i = 1; i <= SIZE; i++) {
-        for (unsigned short j = 1; j <= SIZE / 4; j++) {
-            unsigned short word = field[i * 6 + j];
-            printf("%d%d%d%d", (word & 0b1000000000000000) != 0, (word & 0b0000100000000000) != 0, (word & 0b0000000010000000) != 0, (word & 0b0000000000001000) != 0);
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
-unsigned short field2[FIELD_SIZE];
+unsigned short FIELD1[FIELD_SIZE];
 int main(void) {
     while(1) {
-        print_field(field);
-        getc(stdin);
-        next_gen(field, field2);
-        print_field(field2);
-        getc(stdin);
-        next_gen(field2, field);
+        print(FIELD0);
+        next_gen(FIELD0, FIELD1);
+        print(FIELD1);
+        next_gen(FIELD1, FIELD0);
     }
-
     return 0;
 }
-#endif
