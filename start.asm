@@ -26,7 +26,8 @@ start>
     clr r0
     jsr main
     halt
-
+asect 0xffc0
+PROGRESS> ds 2
 asect 0xffd0 # ffd0 - ffef
 DISPLAY> ds 32
 end.

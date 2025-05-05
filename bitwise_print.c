@@ -1,5 +1,7 @@
 #include "bitwise_print.h"
+extern volatile short PROGRESS;
 void print(unsigned short field[]) {
+    PROGRESS = 0b1000000000000000;
     for (int i = 6, d = 0; i <= 96; i+=6, d++) {
         unsigned short ans = 0;
         for (int j = 1; j <= 4; j++) {
@@ -8,7 +10,9 @@ void print(unsigned short field[]) {
             ans |= ((0b1000000000000000 & ceils) >> 12) | ((0b0000100000000000 & ceils) >> 9) | ((0b0000000010000000 & ceils) >> 6) | ((0b0000000000001000 & ceils) >> 3);
         }
         DISPLAY[d] = ans;
+        PROGRESS |= PROGRESS >> 1;
     }
+    PROGRESS = 0;
 }
 #ifdef BITWISE_PRINT_TEST
 #include <stdio.h>

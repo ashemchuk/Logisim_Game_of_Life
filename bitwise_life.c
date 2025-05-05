@@ -1,8 +1,10 @@
 #include "life.h"
 #include "bitwise_nieghbours.h"
+#include "bitwise_life.h"
 
-
+extern volatile short PROGRESS;
 void next_gen(unsigned short field[], unsigned short write[]) {
+    PROGRESS = 0b1000000000000000;
     for (unsigned short i = 6; i <= 96; i+=6) { // row
         for (unsigned short j = 1; j <= 4; j++) { // one of 4 ceil
             unsigned short c = field[i + j];
@@ -19,7 +21,9 @@ void next_gen(unsigned short field[], unsigned short write[]) {
             unsigned short new = countNeighbours_4(word);
             write[i + j] = new;
         }
+        PROGRESS |=  (PROGRESS >> 1);
     }
+    PROGRESS = 0;
 }
 #ifdef LIFE_TEST
 #include <stdio.h>
@@ -56,13 +60,14 @@ void print_field(unsigned short field[]) {
     printf("\n");
 }
 unsigned short field2[FIELD_SIZE];
+volatile signed short PROGRESS = 0;
 int main(void) {
     while(1) {
         print_field(field);
-        getc(stdin);
+        // getc(stdin);
         next_gen(field, field2);
         print_field(field2);
-        getc(stdin);
+        // getc(stdin);
         next_gen(field2, field);
     }
 

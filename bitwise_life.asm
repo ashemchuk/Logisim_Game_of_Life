@@ -2,6 +2,7 @@
 rsect _bitwise_life_c_16807
 
 countNeighbours_4: ext
+PROGRESS: ext
 
 
 macro movens/2
@@ -17,11 +18,13 @@ next_gen>                               # -- Begin function next_gen
 	ssw	r4, -2                          # 2-byte Folded Spill
 	ssw	r5, -4                          # 2-byte Folded Spill
 	ssw	r6, -6                          # 2-byte Folded Spill
+	ldi	r2, PROGRESS
+	ldi	r3, -32768
+	stw	r2, r3
 	ldi	r2, 6
 	add	r1, 14
 	add	r0, 14
-	ldi	r3, 12
-	ldi	r4, -12
+	ldi	r4, 12
 __LBB0_1:                               # %for.cond1.preheader
                                         # =>This Loop Header: Depth=1
                                         #     Child Loop BB0_4 Depth 2
@@ -35,11 +38,12 @@ __LBB0_4:                               # %for.body4
                                         # =>  This Inner Loop Header: Depth=2
 	lsw	r1, -12                         # 2-byte Folded Reload
 	add r1, r6, r0
-	ldw	r0, r3, r5
-	ssw	r5, -8                          # 2-byte Folded Spill
-	ldw	r0, r4, r3
+	ldw	r0, r4, r4
+	ssw	r4, -8                          # 2-byte Folded Spill
+	ldi	r2, -12
+	ldw	r0, r2, r3
 	shr	r3, r2, 3
-	shr	r5, r4, 3
+	shr	r4, r4, 3
 	add r4, r2, r2
 	ssw	r2, -10                         # 2-byte Folded Spill
 	ldi	r2, -2
@@ -94,7 +98,7 @@ __LBB0_4:                               # %for.body4
 	shr	r1, r5, 7
 	or r5, r4, r4
 	add r3, r4, r3
-	ldi	r4, -12
+	ldi	r4, 12
 	shl	r1, r1, 1
 	ldi	r5, 8190
 	and r1, r5, r1
@@ -106,7 +110,6 @@ __LBB0_4:                               # %for.body4
 	add r3, r0, r0
 	or r0, r2, r0
 	jsr	countNeighbours_4
-	ldi	r3, 12
 	lsw	r1, -14                         # 2-byte Folded Reload
 	stw	r1, r6, r0
 	add	r6, 2
@@ -116,17 +119,29 @@ __LBB0_4:                               # %for.body4
 	br	__LBB0_4
 __LBB0_3:                               # %for.cond.cleanup3
                                         #   in Loop: Header=BB0_1 Depth=1
+	ldi	r0, PROGRESS
+	movens	r0, r2
+	ldw	r2, r0
+	shra	r0, r0, 1
+	ldw	r2, r3
+	or r3, r0, r0
+	stw	r2, r0
 	add	r1, 12
-	lsw	r0, -12                         # 2-byte Folded Reload
-	add	r0, 12
-	lsw	r5, -16                         # 2-byte Folded Reload
-	movens	r5, r2
-	add	r2, 6
-	ldi	r6, 91
-	cmp	r5, r6
+	lsw	r6, -12                         # 2-byte Folded Reload
+	add	r6, 12
+	lsw	r2, -16                         # 2-byte Folded Reload
+	movens	r2, r0
+	add	r0, 6
+	ldi	r3, 91
+	cmp	r2, r3
+	movens	r0, r2
+	movens	r6, r0
 	blo	__LBB0_1
 	br	__LBB0_2
 __LBB0_2:                               # %for.cond.cleanup
+	ldi	r0, 0
+	ldi	r1, PROGRESS
+	stw	r1, r0
 	lsw	r6, -6                          # 2-byte Folded Reload
 	lsw	r5, -4                          # 2-byte Folded Reload
 	lsw	r4, -2                          # 2-byte Folded Reload
