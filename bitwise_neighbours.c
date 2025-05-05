@@ -1,3 +1,4 @@
+#include "bitwise_nieghbours.h"
 int countNeighbours_1(char word) {
     return !(word & 0b00000100) && (word & 0b00000010) && (word & 0b00000001 || word & 0b00001000);
 }

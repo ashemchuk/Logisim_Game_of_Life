@@ -14,8 +14,8 @@ main.asm: main.c
 life.asm: life.c 
 	$(CC) $(C_OPTS) -o life.asm life.c
 
-bitwise: bitwise_print.asm bitwise_life.asm bitwise_main.asm bitwise_neighbours.asm start.asm
-	$(ASM) $(ASM_OPTS) bitwise_print.asm bitwise_life.asm bitwise_main.asm bitwise_neighbours.asm start.asm -o build/out.img
+bitwise: bitwise_print.asm bitwise_life.asm bitwise_main.asm bitwise_neighbours.asm interrupts.asm start.asm
+	$(ASM) $(ASM_OPTS) bitwise_print.asm bitwise_life.asm bitwise_main.asm bitwise_neighbours.asm interrupts.asm start.asm -o build/out.img
 
 bitwise_print.asm: bitwise_print.c
 	$(CC) $(C_OPTS) bitwise_print.c -o bitwise_print.asm
@@ -25,3 +25,5 @@ bitwise_main.asm: bitwise_main.c
 	$(CC) $(C_OPTS) bitwise_main.c -o bitwise_main.asm
 bitwise_neighbours.asm: bitwise_neighbours.c
 	$(CC) $(C_OPTS) bitwise_neighbours.c -o bitwise_neighbours.asm
+interrupts.asm: interrupts.c
+	$(CC) $(C_OPTS) interrupts.c -o interrupts.asm

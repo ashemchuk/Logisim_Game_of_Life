@@ -1,8 +1,8 @@
 ### SECTION: .text
 rsect _main_c_16807
 
-nextGeneration: ext
 print: ext
+nextGeneration: ext
 
 
 macro movens/2
@@ -22,6 +22,8 @@ main>                                   # -- Begin function main
 __LBB0_1:                               # %while.body
                                         # =>This Inner Loop Header: Depth=1
 	movens	r4, r0
+	jsr	print
+	movens	r4, r0
 	movens	r5, r1
 	jsr	nextGeneration
 	movens	r5, r0
@@ -29,8 +31,6 @@ __LBB0_1:                               # %while.body
 	movens	r5, r0
 	movens	r4, r1
 	jsr	nextGeneration
-	movens	r4, r0
-	jsr	print
 	br	__LBB0_1
                                         # -- End function
 ### SECTION: .data

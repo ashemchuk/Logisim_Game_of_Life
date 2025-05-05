@@ -1,6 +1,7 @@
 #ifndef BITWISE_LIFE_H
 #define BITWISE_LIFE_H
 
+#define SIZE 16
 #define FIELD_SIZE 108
  //(SIZE + 2) * (SIZE / 4 + 2); // 4 = sizeof(unsigned short) * 2 -- 4 bits for each ceil
 
