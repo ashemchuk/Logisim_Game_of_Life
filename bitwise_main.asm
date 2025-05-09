@@ -43,93 +43,10 @@ __LBB0_2:                               # %if.then
 	jsr	next_gen
 	br	__LBB0_1
                                         # -- End function
-### SECTION: .data
-FIELD0>                                 # @FIELD0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	34816                           # 0x8800
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	8                               # 0x8
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	32768                           # 0x8000
-	dc	32768                           # 0x8000
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	32768                           # 0x8000
-	dc	34816                           # 0x8800
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	128                             # 0x80
-	dc	32768                           # 0x8000
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	2176                            # 0x880
-	dc	128                             # 0x80
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	128                             # 0x80
-	dc	128                             # 0x80
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	8                               # 0x8
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	0                               # 0x0
-	dc	2176                            # 0x880
-	ds	52
-
 ### SECTION: .bss
+FIELD0>                                 # @FIELD0
+	ds	216
+
 FIELD1>                                 # @FIELD1
 	ds	216
 

@@ -54,9 +54,9 @@ __LBB0_2:                               # %sw.bb
 	ldw	r1, r5, r5
 	shr	r0, r0, 8
 	shr	r0, r0, 14-8
-	add r5, r0, r0
+	add r0, r5, r0
 	shl	r0, r0, 1
-	ldi	r5, FIELD0
+	ldi	r5, FIELD0+2
 	ldw	r0, r5, r6
 	or r6, r3, r3
 	stw	r0, r5, r3
@@ -68,15 +68,15 @@ __LBB0_2:                               # %sw.bb
 	or r3, r0, r0
 	stw	r1, r2, r0
 	br	__LBB0_6
-__LBB0_3:                               # %sw.bb10
+__LBB0_3:                               # %sw.bb11
 	ldi	r0, IS_RUNNING
 	ldw	r0, r3
 	ldi	r1, 0
 	cmp	r3, r1
 	beq	__LBB0_5
-# %bb.4:                                # %sw.bb10
+# %bb.4:                                # %sw.bb11
 	movens	r1, r2
-__LBB0_5:                               # %sw.bb10
+__LBB0_5:                               # %sw.bb11
 	stw	r0, r2
 	ldw	r0, r0
 	ldi	r1, CURSOR_ON
@@ -136,5 +136,9 @@ mul6>                                   # @mul6
 	dc	84                              # 0x54
 	dc	90                              # 0x5a
 	dc	96                              # 0x60
+	dc	102                             # 0x66
+	dc	108                             # 0x6c
+	dc	114                             # 0x72
+	dc	120                             # 0x78
 
 end.

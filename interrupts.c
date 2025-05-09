@@ -17,7 +17,7 @@ int CURSOR[SIZE] = {
 
 };
 int mul6[] = {
-    0, 6, 12,18,24,30,36,42,48,54,60,66,72,78,84,90,96
+    0, 6, 12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102, 108, 114, 120
 };
 __attribute__((CDM_ISR)) void KB_ISR(void) {
     int Y_COORD = ((COORD & 0b1111000000000000) >> 12); /// ?
@@ -26,7 +26,7 @@ __attribute__((CDM_ISR)) void KB_ISR(void) {
     switch (keycode)
     {
     case 0b0000000000000001: // enter
-        FIELD0[mul6[(X_COORD + 1)] + (Y_COORD >> 2)] |= CEILS[Y_COORD & 0b11];
+        FIELD0[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] |= CEILS[Y_COORD & 0b11];
         DISPLAY[X_COORD] |= CURSOR[Y_COORD];
         break;
     case 0b0000000000000010: // pause
