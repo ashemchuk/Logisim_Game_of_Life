@@ -3,24 +3,21 @@ start: ext
 default_handler: ext  
 KB_ISR: ext 
 # Interrupt vector table (IVT)
-# Place a vector to program start and
-# map all internal exceptions to default_handler
-dc start, 0       # Startup/Reset vector
+dc start,           0    # Startup/Reset vector
 dc default_handler, 0   # Unaligned SP
 dc default_handler, 0   # Unaligned PC
 dc default_handler, 0   # Invalid instruction
 dc default_handler, 0   # Double fault
-dc KB_ISR, 0
+dc KB_ISR,          0   # Keyboard
 align 0x80              # Reserve space for the rest 
                         # of IVT
 rsect irp_handlers
 KB_ISR: ext 
-# Exception handlers section
+
 rsect exc_handlers
-# This handler halts processor
 default_handler>
     halt
-# Main program section
+
 rsect start
 main: ext               # main.c
 start>
@@ -30,6 +27,7 @@ start>
     ei
     jsr main
     halt
+
 asect 0xffc0
 PROGRESS> ds 2
 asect 0xffd0 # ffd0 - ffef

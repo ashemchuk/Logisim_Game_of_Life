@@ -1,7 +1,4 @@
-- [ ] Выбрать процессор (пока пишу под cdm8)
-- [ ] Программная часть
-    - [ ] 
-    - [ ]
-- [ ] Аппаратная часть
-    - [ ]
-    - [ ]
+- [ ] end game when all ceils is dead
+- [ ] rewrite Makefile
+- [ ] add target "test"
+- [ ] hardware: 

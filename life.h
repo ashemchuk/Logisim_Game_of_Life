@@ -2,12 +2,9 @@
 #define LIFE_H
 
 #define SIZE 16
+#define FIELD_SIZE 108
+ //(SIZE + 2) * (SIZE / 4 + 2); // 4 = sizeof(unsigned short) * 2 -- 4 bits for each ceil
 
-typedef struct {
-    char x;
-    char y;
-} Ceil;
+void next_gen(unsigned short field[], unsigned short write[]);
 
-void nextGeneration (char read[SIZE][SIZE], char write[SIZE][SIZE]);
-// void initFstGen(char read[SIZE][SIZE]);
 #endif

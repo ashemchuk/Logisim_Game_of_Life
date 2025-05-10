@@ -1,5 +1,0 @@
-❯ make
-cocas -t cdm16 print.asm main.asm life.asm start.asm -o build/life.img
-[Assembler] ERROR at /Users/annashemchuk/repos/Logisim_Game_of_Life/start.asm, line 28
-Label "main" not found
-make: *** [all] Error 1
