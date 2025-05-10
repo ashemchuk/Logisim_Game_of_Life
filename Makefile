@@ -1,3 +1,4 @@
+# https://makefiletutorial.com/#automatic-variables-and-wildcards
 CC=./clang-cdm-macos-latest/clang-19
 C_OPTS=-target cdm -S -O1
 

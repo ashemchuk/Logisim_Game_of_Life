@@ -12,15 +12,9 @@
 			}
 		},
 		{
-			"label": "MAKEE",
-			"type":"shell",
-			"command": ["make"]
-
-		}, 
-		{
-			"label": "bitwise make",
+			"label": "MAKE",
 			"type": "shell",
-			"command": ["make", "bitwise"]
+			"command": ["make"]
 		},
 		{
 			"label": "C build active file",
