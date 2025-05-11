@@ -1,6 +1,4 @@
-build
 clang-cdm-macos-latest
 **/*.dSYM
 *.out
 .DS_Store
-*.img
