@@ -8,7 +8,7 @@ push $1
 pop $2
 mend
 
-countNeighbours_1>                      # -- Begin function countNeighbours_1
+next_state_1ceil>                       # -- Begin function next_state_1ceil
 # %bb.0:                                # %entry
 	push	fp
 	ldsp	fp
@@ -38,7 +38,7 @@ __LBB0_4:                               # %entry
 	pop	fp
 	rts
                                         # -- End function
-countNeighbours_4>                      # -- Begin function countNeighbours_4
+next_state>                             # -- Begin function next_state
 # %bb.0:                                # %entry
 	shr	r0, r1, 3
 	or r1, r0, r1

@@ -1,7 +1,7 @@
 ### SECTION: .text
 rsect _life_c_16807
 
-countNeighbours_4: ext
+next_state: ext
 PROGRESS: ext
 
 
@@ -109,7 +109,7 @@ __LBB0_4:                               # %for.body4
 	or r0, r1, r0
 	add r3, r0, r0
 	or r0, r2, r0
-	jsr	countNeighbours_4
+	jsr	next_state
 	lsw	r1, -14                         # 2-byte Folded Reload
 	stw	r1, r6, r0
 	add	r6, 2

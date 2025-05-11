@@ -18,7 +18,7 @@ void next_gen(unsigned short field[], unsigned short write[]) {
             unsigned short SE = ((field[(i + 6) + (j + 1)] & 0b1111000000000000) >> 12 | (S << 4));
             unsigned short neighbours = (N >> 3) + (S >> 3) + (E >> 3) + (W >> 3) + (NW >> 3) + (NE >> 3) + (SW >> 3) + (SE >> 3);
             unsigned short word = neighbours | c;
-            unsigned short new = countNeighbours_4(word);
+            unsigned short new = next_state(word);
             write[i + j] = new;
         }
         PROGRESS |=  (PROGRESS >> 1);

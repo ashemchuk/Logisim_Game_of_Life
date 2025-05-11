@@ -1,8 +1,8 @@
 #include "nieghbours.h"
-short countNeighbours_1(char word) {
+short next_state_1ceil(char word) {
     return !(word & 0b00000100) && (word & 0b00000010) && (word & 0b00000001 || word & 0b00001000);
 }
-short countNeighbours_4(short word) {
+short next_state(short word) {
     return ((((word & 0b0100010001000100) ^ 0b0100010001000100) >> 2) &
     ((word & 0b0010001000100010) >> 1) &
     ((word & 0b0001000100010001) | (word & 0b1000100010001000) >> 3)) << 3;
@@ -33,29 +33,29 @@ short countNeighbours_default(short word) {
     return ans;
 }
 int main(void) {
-    assert(countNeighbours_1(0b00000000) == 0);
-    assert(countNeighbours_1(0b00000001) == 0);
-    assert(countNeighbours_1(0b00000010) == 0);
-    assert(countNeighbours_1(0b00000011) == 1);
-    assert(countNeighbours_1(0b00000100) == 0);
-    assert(countNeighbours_1(0b00000101) == 0);
-    assert(countNeighbours_1(0b00000110) == 0);
-    assert(countNeighbours_1(0b00000111) == 0);
-    assert(countNeighbours_1(0b00001000) == 0);
-    assert(countNeighbours_1(0b00001001) == 0);
-    assert(countNeighbours_1(0b00001010) == 1);
-    assert(countNeighbours_1(0b00001011) == 1);
-    assert(countNeighbours_1(0b00001100) == 0);
-    assert(countNeighbours_1(0b00001101) == 0);
-    assert(countNeighbours_1(0b00001110) == 0);
-    assert(countNeighbours_1(0b00001111) == 0);
+    assert(next_state_1ceil(0b00000000) == 0);
+    assert(next_state_1ceil(0b00000001) == 0);
+    assert(next_state_1ceil(0b00000010) == 0);
+    assert(next_state_1ceil(0b00000011) == 1);
+    assert(next_state_1ceil(0b00000100) == 0);
+    assert(next_state_1ceil(0b00000101) == 0);
+    assert(next_state_1ceil(0b00000110) == 0);
+    assert(next_state_1ceil(0b00000111) == 0);
+    assert(next_state_1ceil(0b00001000) == 0);
+    assert(next_state_1ceil(0b00001001) == 0);
+    assert(next_state_1ceil(0b00001010) == 1);
+    assert(next_state_1ceil(0b00001011) == 1);
+    assert(next_state_1ceil(0b00001100) == 0);
+    assert(next_state_1ceil(0b00001101) == 0);
+    assert(next_state_1ceil(0b00001110) == 0);
+    assert(next_state_1ceil(0b00001111) == 0);
     for (short c1 = 0; c1 < 16; c1++) {
         for (short c2 = 0; c2 < 16; c2++) {
             for (short c3 = 0; c3 < 16; c3++) {
                 for (short c4 = 0; c4 < 16; c4++) {
                     short word = (c1 << 12) | (c2 << 8) | (c3 << 4) | (c4);
-                    assert(countNeighbours_4(word) == countNeighbours_default(word));
-                    print_b(countNeighbours_4(word));
+                    assert(next_state(word) == countNeighbours_default(word));
+                    print_b(next_state(word));
                     if (word == 32904) {
                         getc(stdin);
                     }
