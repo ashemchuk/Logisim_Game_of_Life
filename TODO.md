@@ -1,5 +1,4 @@
 - [ ] end game when all ceils is dead
-- [ ] rewrite Makefile (filename patterns)
+- [X] rewrite Makefile (filename patterns)
 - [ ] add target "test"
 - [ ] ? add ability to edit field when game is paused
-- [ ] 

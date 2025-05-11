@@ -42,7 +42,7 @@ void print_b(short word) {
     }
     printf("\n");
 }
-volatile short DISPLAY[];
+volatile short DISPLAY[16];
 int main(void) {
     print(field);
     for (short i = 0; i < 16; i++) {
