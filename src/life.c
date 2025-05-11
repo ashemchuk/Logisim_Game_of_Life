@@ -1,4 +1,4 @@
-#include "nieghbours.h"
+#include "conclusion.h"
 #include "life.h"
 
 extern volatile short PROGRESS;
