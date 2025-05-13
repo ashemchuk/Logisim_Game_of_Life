@@ -25,59 +25,81 @@ KB_ISR>                                 # -- Begin function KB_ISR
 	ssw	r4, -10                         # 2-byte Folded Spill
 	ssw	r5, -12                         # 2-byte Folded Spill
 	ssw	r6, -14                         # 2-byte Folded Spill
-	ldi	r1, COORD
-	ldw	r1, r0
-	ldw	r1, r1
-	ldi	r2, KEYBOARD
-	ldw	r2, r3
-	ldi	r2, 2
-	cmp	r3, r2
-	ldi	r2, 1
-	beq	__LBB0_3
+	ldi	r0, COORD
+	ldw	r0, r2
+	ldw	r0, r0
+	ldi	r1, KEYBOARD
+	ldw	r1, r3
+	ldi	r1, 2
+	cmp	r3, r1
+	ldi	r1, 1
+	beq	__LBB0_5
 	br	__LBB0_1
 __LBB0_1:                               # %entry
-	cmp	r3, r2
-	bne	__LBB0_6
+	cmp	r3, r1
+	bne	__LBB0_8
 	br	__LBB0_2
 __LBB0_2:                               # %sw.bb
-	shr	r0, r2, 8
-	shr	r2, r2, 11-8
-	ldi	r3, 6
-	and r2, r3, r3
+	ldi	r1, 15
+	and r0, r1, r0
+	shr	r2, r1, 8
+	shr	r1, r1, 12-8
+	ldi	r3, 3
+	and r1, r3, r3
+	shl	r3, r3, 1
 	ldi	r4, CEILS
 	ldw	r3, r4, r3
-	shl	r1, r1, 1
-	ldi	r4, 30
-	and r1, r4, r1
-	ldi	r5, mul6+2
-	ldw	r1, r5, r5
-	shr	r0, r0, 8
-	shr	r0, r0, 14-8
-	add r0, r5, r0
 	shl	r0, r0, 1
+	ldi	r4, mul6+2
+	ldw	r0, r4, r4
+	shr	r2, r2, 8
+	shr	r2, r2, 14-8
+	add r2, r4, r2
+	shl	r2, r4, 1
 	ldi	r5, FIELD0+2
-	ldw	r0, r5, r6
-	or r6, r3, r3
-	stw	r0, r5, r3
-	and r2, r4, r0
+	add r4, r5, r2
+	ldw	r4, r5, r4
+	and r3, r4, r5
+	ldi	r6, 0
+	cmp	r5, r6
+	bne	__LBB0_4
+	br	__LBB0_3
+__LBB0_4:                               # %if.else
+	ldi	r5, -1
+	xor r3, r5, r3
+	and r4, r3, r3
+	stw	r2, r3
+	shl	r1, r1, 1
 	ldi	r2, CURSOR
-	ldw	r0, r2, r0
+	ldw	r1, r2, r1
+	xor r1, r5, r1
 	ldi	r2, DISPLAY
-	ldw	r1, r2, r3
-	or r3, r0, r0
-	stw	r1, r2, r0
-	br	__LBB0_6
-__LBB0_3:                               # %sw.bb11
+	ldw	r0, r2, r3
+	and r3, r1, r1
+	stw	r0, r2, r1
+	br	__LBB0_8
+__LBB0_3:                               # %if.then
+	or r3, r4, r3
+	stw	r2, r3
+	shl	r1, r1, 1
+	ldi	r2, CURSOR
+	ldw	r1, r2, r1
+	ldi	r2, DISPLAY
+	ldw	r0, r2, r3
+	or r3, r1, r1
+	stw	r0, r2, r1
+	br	__LBB0_8
+__LBB0_5:                               # %sw.bb33
 	ldi	r0, IS_RUNNING
 	ldw	r0, r3
-	ldi	r1, 0
-	cmp	r3, r1
-	beq	__LBB0_5
-# %bb.4:                                # %sw.bb11
-	movens	r1, r2
-__LBB0_5:                               # %sw.bb11
-	stw	r0, r2
-__LBB0_6:                               # %sw.epilog
+	ldi	r2, 0
+	cmp	r3, r2
+	beq	__LBB0_7
+# %bb.6:                                # %sw.bb33
+	movens	r2, r1
+__LBB0_7:                               # %sw.bb33
+	stw	r0, r1
+__LBB0_8:                               # %sw.epilog
 	lsw	r6, -14                         # 2-byte Folded Reload
 	lsw	r5, -12                         # 2-byte Folded Reload
 	lsw	r4, -10                         # 2-byte Folded Reload

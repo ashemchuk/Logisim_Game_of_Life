@@ -25,9 +25,17 @@ __attribute__((CDM_ISR)) void KB_ISR(void) {
     switch (keycode)
     {
     case 0b0000000000000001: // enter
-        FIELD0[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] |= CEILS[Y_COORD & 0b11];
-        DISPLAY[X_COORD] |= CURSOR[Y_COORD];
+    {
+        unsigned short cur = FIELD0[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] & CEILS[Y_COORD & 0b11];
+        if (cur == 0) {
+            FIELD0[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] |= CEILS[Y_COORD & 0b11]; // set
+            DISPLAY[X_COORD] |= CURSOR[Y_COORD];
+        } else {
+            FIELD0[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] &= (~CEILS[Y_COORD & 0b11]); //clear
+            DISPLAY[X_COORD] &= (~CURSOR[Y_COORD]);
+        }
         break;
+    }
     case 0b0000000000000010: // pause
         IS_RUNNING = !IS_RUNNING; // ?
         // CURSOR_ON = IS_RUNNING;
