@@ -6,7 +6,6 @@ KEYBOARD: ext
 FIELD0: ext
 DISPLAY: ext
 IS_RUNNING: ext
-CURSOR_ON: ext
 
 
 macro movens/2
@@ -78,9 +77,6 @@ __LBB0_3:                               # %sw.bb11
 	movens	r1, r2
 __LBB0_5:                               # %sw.bb11
 	stw	r0, r2
-	ldw	r0, r0
-	ldi	r1, CURSOR_ON
-	stw	r1, r0
 __LBB0_6:                               # %sw.epilog
 	lsw	r6, -14                         # 2-byte Folded Reload
 	lsw	r5, -12                         # 2-byte Folded Reload

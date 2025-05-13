@@ -8,8 +8,6 @@ int main(void) {
         if (IS_RUNNING) {
             next_gen(FIELD0, FIELD1);
             print(FIELD1);
-        };
-        if (IS_RUNNING) {
             next_gen(FIELD1, FIELD0);
             print(FIELD0);
         }

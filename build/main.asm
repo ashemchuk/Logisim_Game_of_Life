@@ -19,40 +19,27 @@ main>                                   # -- Begin function main
 	ssw	r4, -2                          # 2-byte Folded Spill
 	ssw	r5, -4                          # 2-byte Folded Spill
 	ssw	r6, -6                          # 2-byte Folded Spill
-	ldi	r6, IS_RUNNING
-	ldi	r4, 0
-	ldi	r5, FIELD0
+	ldi	r6, 0
+	ldi	r4, FIELD0
+	ldi	r5, FIELD1
 __LBB0_1:                               # %while.body
                                         # =>This Inner Loop Header: Depth=1
-	ldw	r6, r0
-	cmp	r0, r4
-	beq	__LBB0_3
+	ldi	r0, IS_RUNNING
+	ldw	r0, r0
+	cmp	r0, r6
+	beq	__LBB0_1
 	br	__LBB0_2
 __LBB0_2:                               # %if.then
                                         #   in Loop: Header=BB0_1 Depth=1
-	movens	r5, r0
-	movens	r6, r4
-	movens	r5, r6
-	ldi	r5, FIELD1
+	movens	r4, r0
 	movens	r5, r1
 	jsr	next_gen
 	movens	r5, r0
-	movens	r6, r5
-	movens	r4, r6
-	ldi	r4, 0
 	jsr	print
-__LBB0_3:                               # %if.end
-                                        #   in Loop: Header=BB0_1 Depth=1
-	ldw	r6, r0
-	cmp	r0, r4
-	beq	__LBB0_1
-	br	__LBB0_4
-__LBB0_4:                               # %if.then2
-                                        #   in Loop: Header=BB0_1 Depth=1
-	ldi	r0, FIELD1
-	movens	r5, r1
-	jsr	next_gen
 	movens	r5, r0
+	movens	r4, r1
+	jsr	next_gen
+	movens	r4, r0
 	jsr	print
 	br	__LBB0_1
                                         # -- End function
