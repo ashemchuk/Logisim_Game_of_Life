@@ -4,7 +4,7 @@ extern volatile short IS_RUNNING;
 extern volatile short COORD;
 extern short FIELD0[FIELD_SIZE];
 extern volatile short DISPLAY[SIZE];
-extern volatile short CURSOR_ON;
+// extern volatile short CURSOR_ON;
 short CEILS[4] = {
     0b1000000000000000, 0b0000100000000000, 0b0000000010000000, 0b0000000000001000
 };
@@ -30,7 +30,7 @@ __attribute__((CDM_ISR)) void KB_ISR(void) {
         break;
     case 0b0000000000000010: // pause
         IS_RUNNING = !IS_RUNNING; // ?
-        CURSOR_ON = IS_RUNNING;
+        // CURSOR_ON = IS_RUNNING;
         break;
     default:
         break;

@@ -28,16 +28,13 @@ start>
     jsr main
     halt
 
-asect 0xffc0
-PROGRESS> ds 2
+
 asect 0xffd0 # ffd0 - ffef
 DISPLAY> ds 32
 asect 0xfff0
 KEYBOARD> ds 2
-asect 0xfff2
-CURSOR_ON> ds 2
-asect 0xffb0 # game state
-IS_RUNNING> ds 2
+IS_RUNNING> ds 2 # game state
 COORD> ds 2
+PROGRESS> ds 2
 ALIVE_CEILS> ds 2
 end.
