@@ -36,5 +36,4 @@ KEYBOARD> ds 2
 IS_RUNNING> ds 2 # game state
 COORD> ds 2
 PROGRESS> ds 2
-ALIVE_CEILS> ds 2
 end.

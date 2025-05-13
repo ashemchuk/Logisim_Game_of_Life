@@ -2,7 +2,6 @@
 - [X] rewrite Makefile (filename patterns)
 - [ ] add target "test"
 - [ ] ? add ability to edit field when game is paused
-- [ ] erase ceil in edit mode
+- [X] erase ceil in edit mode
 - [ ] PAUSE stops game at any time (now - after game cycle ends)
-- [ ] edit is always enable when game is paused
-- [ ] labels???
+- [X] labels???

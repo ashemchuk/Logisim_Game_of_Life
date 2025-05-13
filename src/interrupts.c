@@ -2,9 +2,9 @@
 extern volatile short KEYBOARD;
 extern volatile short IS_RUNNING;
 extern volatile short COORD;
-extern short FIELD0[FIELD_SIZE];
+extern volatile short ALIVE_CEILS;
+extern volatile unsigned short* CUR_READ;
 extern volatile short DISPLAY[SIZE];
-// extern volatile short CURSOR_ON;
 short CEILS[4] = {
     0b1000000000000000, 0b0000100000000000, 0b0000000010000000, 0b0000000000001000
 };
@@ -26,19 +26,18 @@ __attribute__((CDM_ISR)) void KB_ISR(void) {
     {
     case 0b0000000000000001: // enter
     {
-        unsigned short cur = FIELD0[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] & CEILS[Y_COORD & 0b11];
+        unsigned short cur = CUR_READ[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] & CEILS[Y_COORD & 0b11];
         if (cur == 0) {
-            FIELD0[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] |= CEILS[Y_COORD & 0b11]; // set
+            CUR_READ[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] |= CEILS[Y_COORD & 0b11]; // set
             DISPLAY[X_COORD] |= CURSOR[Y_COORD];
         } else {
-            FIELD0[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] &= (~CEILS[Y_COORD & 0b11]); //clear
+            CUR_READ[(mul6[X_COORD + 1] + 1) + (Y_COORD >> 2)] &= (~CEILS[Y_COORD & 0b11]); //clear
             DISPLAY[X_COORD] &= (~CURSOR[Y_COORD]);
         }
         break;
     }
     case 0b0000000000000010: // pause
-        IS_RUNNING = !IS_RUNNING; // ?
-        // CURSOR_ON = IS_RUNNING;
+        IS_RUNNING = !IS_RUNNING;
         break;
     default:
         break;

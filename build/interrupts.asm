@@ -3,7 +3,7 @@ rsect _src_interrupts_c_16807
 
 COORD: ext
 KEYBOARD: ext
-FIELD0: ext
+CUR_READ: ext
 DISPLAY: ext
 IS_RUNNING: ext
 
@@ -17,70 +17,79 @@ KB_ISR>                                 # -- Begin function KB_ISR
 # %bb.0:                                # %entry
 	push	fp
 	ldsp	fp
-	addsp	-14
+	addsp	-12
 	ssw	r0, -2                          # 2-byte Folded Spill
 	ssw	r1, -4                          # 2-byte Folded Spill
 	ssw	r2, -6                          # 2-byte Folded Spill
 	ssw	r3, -8                          # 2-byte Folded Spill
 	ssw	r4, -10                         # 2-byte Folded Spill
 	ssw	r5, -12                         # 2-byte Folded Spill
-	ssw	r6, -14                         # 2-byte Folded Spill
 	ldi	r0, COORD
-	ldw	r0, r2
+	ldw	r0, r3
 	ldw	r0, r0
 	ldi	r1, KEYBOARD
-	ldw	r1, r3
-	ldi	r1, 2
-	cmp	r3, r1
+	ldw	r1, r4
+	ldi	r2, 2
+	cmp	r4, r2
 	ldi	r1, 1
 	beq	__LBB0_5
 	br	__LBB0_1
 __LBB0_1:                               # %entry
-	cmp	r3, r1
+	cmp	r4, r1
 	bne	__LBB0_8
 	br	__LBB0_2
 __LBB0_2:                               # %sw.bb
 	ldi	r1, 15
 	and r0, r1, r0
-	shr	r2, r1, 8
+	shr	r3, r1, 8
 	shr	r1, r1, 12-8
-	ldi	r3, 3
-	and r1, r3, r3
-	shl	r3, r3, 1
-	ldi	r4, CEILS
-	ldw	r3, r4, r3
+	ldi	r4, CUR_READ
+	ldb	r4, r4
+	ldi	r5, CUR_READ+1
+	ldb	r5, r5
+	shl	r5, r5, 8
+	or r5, r4, r4
 	shl	r0, r0, 1
-	ldi	r4, mul6+2
-	ldw	r0, r4, r4
-	shr	r2, r2, 8
-	shr	r2, r2, 14-8
-	add r2, r4, r2
-	shl	r2, r4, 1
-	ldi	r5, FIELD0+2
-	add r4, r5, r2
-	ldw	r4, r5, r4
-	and r3, r4, r5
-	ldi	r6, 0
-	cmp	r5, r6
+	ldi	r5, mul6+2
+	ldw	r0, r5, r5
+	shl	r5, r5, 1
+	add r4, r5, r4
+	shr	r3, r3, 8
+	shr	r3, r3, 13-8
+	ldi	r5, 6
+	and r3, r5, r3
+	add r4, r3, r3
+	ldi	r4, 3
+	and r1, r4, r4
+	ldw	r3, r2, r5
+	shl	r4, r2, 1
+	ldi	r4, CEILS
+	ldw	r2, r4, r2
+	add	r3, 2
+	and r2, r5, r4
+	ldi	r5, 0
+	cmp	r4, r5
 	bne	__LBB0_4
 	br	__LBB0_3
 __LBB0_4:                               # %if.else
-	ldi	r5, -1
-	xor r3, r5, r3
-	and r4, r3, r3
-	stw	r2, r3
+	ldi	r4, -1
+	xor r2, r4, r2
+	ldw	r3, r5
+	and r5, r2, r2
+	stw	r3, r2
 	shl	r1, r1, 1
 	ldi	r2, CURSOR
 	ldw	r1, r2, r1
-	xor r1, r5, r1
+	xor r1, r4, r1
 	ldi	r2, DISPLAY
 	ldw	r0, r2, r3
 	and r3, r1, r1
 	stw	r0, r2, r1
 	br	__LBB0_8
 __LBB0_3:                               # %if.then
-	or r3, r4, r3
-	stw	r2, r3
+	ldw	r3, r4
+	or r4, r2, r2
+	stw	r3, r2
 	shl	r1, r1, 1
 	ldi	r2, CURSOR
 	ldw	r1, r2, r1
@@ -100,14 +109,13 @@ __LBB0_5:                               # %sw.bb33
 __LBB0_7:                               # %sw.bb33
 	stw	r0, r1
 __LBB0_8:                               # %sw.epilog
-	lsw	r6, -14                         # 2-byte Folded Reload
 	lsw	r5, -12                         # 2-byte Folded Reload
 	lsw	r4, -10                         # 2-byte Folded Reload
 	lsw	r3, -8                          # 2-byte Folded Reload
 	lsw	r2, -6                          # 2-byte Folded Reload
 	lsw	r1, -4                          # 2-byte Folded Reload
 	lsw	r0, -2                          # 2-byte Folded Reload
-	addsp	14
+	addsp	12
 	pop	fp
 	rti
                                         # -- End function
