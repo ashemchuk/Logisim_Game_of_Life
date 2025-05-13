@@ -1,5 +1,5 @@
 ### SECTION: .text
-rsect _interrupts_c_16807
+rsect _src_interrupts_c_16807
 
 COORD: ext
 KEYBOARD: ext

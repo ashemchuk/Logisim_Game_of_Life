@@ -1,5 +1,5 @@
 ### SECTION: .text
-rsect _main_c_16807
+rsect _src_main_c_16807
 
 next_gen: ext
 print: ext

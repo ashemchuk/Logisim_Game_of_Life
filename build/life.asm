@@ -1,5 +1,5 @@
 ### SECTION: .text
-rsect _life_c_16807
+rsect _src_life_c_16807
 
 next_state: ext
 PROGRESS: ext

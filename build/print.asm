@@ -1,5 +1,5 @@
 ### SECTION: .text
-rsect _print_c_16807
+rsect _src_print_c_16807
 
 PROGRESS: ext
 DISPLAY: ext
